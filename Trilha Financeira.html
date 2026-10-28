@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trilha Financeira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233f; --ink-soft:#3a4a6b; --paper:#f3efe4; --panel:#ffffff;
+    --gold:#c99a3a; --gold-deep:#a87c22; --good:#3f6b52; --bad:#a8492f;
+    --line:#d9d2bf; --radius:14px;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#eef1f8; --ink-soft:#b7c0d6; --paper:#141a2b; --panel:#1d2438;
+      --gold:#e0b657; --gold-deep:#c99a3a; --good:#6fae8b; --bad:#e2795a; --line:#2c3552;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#eef1f8; --ink-soft:#b7c0d6; --paper:#141a2b; --panel:#1d2438;
+    --gold:#e0b657; --gold-deep:#c99a3a; --good:#6fae8b; --bad:#e2795a; --line:#2c3552;
+  }
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100%; background:var(--paper); color:var(--ink);
+    font-family:'Space Grotesk',sans-serif;
+    display:flex; justify-content:center; padding:28px 16px 40px;
+  }
+  .wrap{width:100%; max-width:880px;}
+  h1{
+    font-family:'Fraunces',serif; font-weight:700; font-size:clamp(28px,4vw,42px);
+    margin:0 0 4px; letter-spacing:-0.01em;
+  }
+  .sub{color:var(--ink-soft); margin:0 0 22px; font-size:15px; max-width:60ch;}
+  .track{
+    display:flex; gap:6px; overflow-x:auto; padding:4px 0 18px; scrollbar-width:thin;
+  }
+  .stop{
+    flex:0 0 auto; width:34px; height:34px; border-radius:50%;
+    border:2px solid var(--line); display:flex; align-items:center; justify-content:center;
+    font-size:13px; font-weight:700; color:var(--ink-soft); background:var(--panel);
+    transition:transform .25s ease;
+  }
+  .stop.done{border-color:var(--good); color:var(--good);}
+  .stop.now{border-color:var(--gold); color:var(--ink); background:var(--gold); transform:scale(1.12);}
+  .stats{
+    display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;
+  }
+  .stat{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:12px 18px; flex:1; min-width:150px;
+  }
+  .stat .label{font-size:12px; color:var(--ink-soft); margin-bottom:2px;}
+  .stat .value{font-family:'Fraunces',serif; font-size:26px; font-weight:700;}
+  .stat.good .value{color:var(--good);} .stat.bad .value{color:var(--bad);}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px clamp(18px,4vw,34px); position:relative;
+  }
+  .stage-name{color:var(--gold-deep); font-weight:700; font-size:13px; margin-bottom:10px;}
+  .event{font-family:'Fraunces',serif; font-size:clamp(20px,2.6vw,27px); font-weight:600; line-height:1.35; margin:0 0 22px;}
+  .choices{display:flex; flex-direction:column; gap:10px;}
+  button.choice{
+    text-align:left; font-family:inherit; font-size:15.5px; color:var(--ink);
+    background:var(--paper); border:1px solid var(--line); border-radius:10px;
+    padding:14px 16px; cursor:pointer; transition:border-color .15s, background .15s;
+  }
+  button.choice:hover{border-color:var(--gold);}
+  button.choice:disabled{cursor:default;}
+  .feedback{margin-top:20px; padding-top:18px; border-top:1px solid var(--line);}
+  .feedback .tag{
+    display:inline-block; font-size:12.5px; font-weight:700; padding:4px 10px;
+    border-radius:20px; margin-bottom:10px;
+  }
+  .feedback.pos .tag{background:color-mix(in srgb, var(--good) 18%, transparent); color:var(--good);}
+  .feedback.neg .tag{background:color-mix(in srgb, var(--bad) 18%, transparent); color:var(--bad);}
+  .feedback p{margin:0 0 18px; line-height:1.55; color:var(--ink-soft);}
+  .next{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px;
+    background:var(--ink); color:var(--paper); border:none; border-radius:10px;
+    padding:12px 22px; cursor:pointer;
+  }
+  .end h2{font-family:'Fraunces',serif; font-size:30px; margin:0 0 6px;}
+  .end .rank{font-size:17px; color:var(--gold-deep); font-weight:700; margin-bottom:16px;}
+  .end p{line-height:1.6; color:var(--ink-soft);}
+  .restart{
+    margin-top:18px; background:none; border:1px solid var(--line); color:var(--ink);
+    padding:10px 18px; border-radius:10px; font-family:inherit; font-size:14px; cursor:pointer;
+  }
+  .discuss{
+    margin-top:22px; padding:16px 18px; background:var(--paper); border-radius:10px; border:1px dashed var(--line);
+  }
+  .discuss p{margin:4px 0; font-size:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Trilha Financeira</h1>
+  <p class="sub">Um estudante universitário, uma bolsa apertada e decisões que se acumulam. A turma discute cada escolha antes de seguir em frente.</p>
+
+  <div class="track" id="track"></div>
+
+  <div class="stats">
+    <div class="stat"><div class="label">Saldo</div><div class="value" id="saldoVal">R$ 0</div></div>
+    <div class="stat"><div class="label">Índice financeiro</div><div class="value" id="scoreVal">0</div></div>
+  </div>
+
+  <div class="card" id="card"></div>
+</div>
+
+<script>
+const stages = [
+  { name:"Matrícula", event:"Você entra na faculdade com uma bolsa parcial e um dinheiro guardado do ensino médio. Como organizar o primeiro mês?",
+    choices:[
+      {label:"Anotar cada gasto num app ou planilha simples", saldo:0, score:15, tag:"pos", fb:"Registrar gastos é a base de qualquer orçamento — sem saber para onde o dinheiro vai, não dá para planejar nada."},
+      {label:"Gastar conforme a necessidade e ver no fim do mês", saldo:-80, score:-5, fb:"Sem acompanhar os gastos, pequenas despesas somam e o mês fecha no vermelho sem explicação clara."},
+      {label:"Guardar tudo e não gastar quase nada", saldo:20, score:0, fb:"Economizar é bom, mas um orçamento rígido demais costuma quebrar no primeiro imprevisto."}
+    ]},
+  { name:"Primeiro estágio", event:"O primeiro salário de estagiário cai na conta: R$ 900. O que fazer com ele?",
+    choices:[
+      {label:"Dividir entre gastos fixos, uma reserva e lazer", saldo:900, score:15, tag:"pos", fb:"Dividir o salário em categorias — mesmo que informalmente — evita que tudo vire gasto do mês."},
+      {label:"Comprar algo que está querendo há tempo", saldo:600, score:-5, fb:"Não há problema em se presentear, mas gastar o salário inteiro de uma vez deixa zero de margem para imprevistos."},
+      {label:"Deixar parado na conta corrente", saldo:900, score:-5, fb:"Dinheiro parado na conta corrente perde poder de compra para a inflação — mesmo uma poupança simples já rende mais."}
+    ]},
+  { name:"Vida social", event:"Os amigos combinam happy hour toda sexta-feira. Como encaixar isso no orçamento?",
+    choices:[
+      {label:"Definir um valor mensal para lazer e respeitar", saldo:-150, score:10, tag:"pos", fb:"Ter um limite definido para lazer permite aproveitar a vida social sem comprometer o resto do orçamento."},
+      {label:"Ir sempre e pagar com o cartão de crédito", saldo:-320, score:-10, fb:"Usar crédito para gastos recorrentes de lazer é um dos caminhos mais comuns para o endividamento."},
+      {label:"Nunca ir para não gastar nada", saldo:0, score:0, fb:"Cortar todo lazer é insustentável a longo prazo e raramente é a resposta mais equilibrada."}
+    ]},
+  { name:"Cartão de crédito", event:"O banco libera um cartão com limite de R$ 2.000. O que fazer com esse limite?",
+    choices:[
+      {label:"Usar só o que cabe no orçamento e pagar a fatura integral", saldo:0, score:15, tag:"pos", fb:"O cartão é uma ferramenta útil quando a fatura é sempre paga integralmente — assim nunca há juros."},
+      {label:"Usar o limite todo, já que 'dá para pagar depois'", saldo:-100, score:-15, fb:"Tratar o limite do cartão como renda extra é um erro comum que leva à fatura impagável."},
+      {label:"Cancelar o cartão para não ter tentação", saldo:0, score:5, fb:"Evitar o cartão resolve o risco, mas também tira a chance de construir histórico de crédito com uso responsável."}
+    ]},
+  { name:"Notebook novo", event:"O notebook velho quebrou e a faculdade exige um para os trabalhos. A loja oferece 12x sem juros ou 3x com juros de 8% ao mês.",
+    choices:[
+      {label:"Parcelar em 12x sem juros, dentro do orçamento mensal", saldo:-250, score:15, tag:"pos", fb:"Parcelamento sem juros que cabe no orçamento é diferente de dívida — o valor final é o mesmo do preço à vista."},
+      {label:"Parcelar em 3x com juros para 'quitar logo'", saldo:-450, score:-15, fb:"Pagar mais rápido não compensa quando os juros embutidos encarecem bastante o total pago."},
+      {label:"Comprar um usado mais barato à vista", saldo:-600, score:10, fb:"Uma compra à vista evita juros, mas exige ter a reserva disponível sem comprometer outras contas."}
+    ]},
+  { name:"Imprevisto", event:"Uma dor de dente vira uma consulta e um tratamento não previstos, custando R$ 400.",
+    choices:[
+      {label:"Pagar com a reserva de emergência", saldo:-400, score:15, tag:"pos", fb:"É exatamente para isso que existe a reserva de emergência: imprevistos sem precisar recorrer a dívida."},
+      {label:"Colocar no cartão de crédito", saldo:-450, score:-10, fb:"Sem reserva, o imprevisto vira dívida com juros — o mesmo problema custa mais caro."},
+      {label:"Pedir emprestado para um amigo", saldo:-400, score:-5, fb:"Resolve no curto prazo, mas cria uma pendência informal que pode pesar na relação e não trata a causa: falta de reserva."}
+    ]},
+  { name:"Dinheiro extra", event:"No aniversário, a família dá R$ 500 de presente. O que fazer com o dinheiro?",
+    choices:[
+      {label:"Guardar em uma reserva de emergência, se ainda não tiver uma", saldo:500, score:15, tag:"pos", fb:"Sem reserva formada, todo dinheiro extra é uma boa oportunidade para começar a construí-la."},
+      {label:"Investir em algo de baixo risco, já tendo reserva", saldo:500, score:15, tag:"pos", fb:"Com a reserva já garantida, colocar o excedente para render é o próximo passo natural."},
+      {label:"Gastar tudo em uma viagem de fim de semana", saldo:100, score:-5, fb:"Não há problema em usar parte para lazer, mas gastar o valor inteiro deixa passar a chance de fortalecer a reserva."}
+    ]},
+  { name:"Formatura", event:"Faltam poucos meses para se formar. Olhando para trás, qual é o maior aprendizado sobre dinheiro?",
+    choices:[
+      {label:"Saber para onde o dinheiro vai muda todas as outras decisões", saldo:0, score:15, tag:"pos", fb:"Esse é o ponto de partida de qualquer educação financeira: visibilidade antes de qualquer plano."},
+      {label:"O cartão de crédito só é vantagem quando a fatura é paga em dia", saldo:0, score:15, tag:"pos", fb:"Entender o funcionamento do crédito rotativo evita a armadilha mais comum entre jovens adultos."},
+      {label:"Ter uma reserva muda como você reage a imprevistos", saldo:0, score:15, tag:"pos", fb:"A reserva de emergência é o que separa um imprevisto de uma crise financeira."}
+    ]}
+];
+
+let i = 0, saldo = 0, score = 0, chosen = false;
+
+function renderTrack(){
+  const t = document.getElementById('track');
+  t.innerHTML = stages.map((s,idx) => {
+    const cls = idx < i ? 'done' : idx === i ? 'now' : '';
+    return `<div class="stop ${cls}">${idx+1}</div>`;
+  }).join('');
+}
+
+function renderStats(){
+  document.getElementById('saldoVal').textContent = 'R$ ' + saldo.toLocaleString('pt-BR');
+  document.getElementById('scoreVal').textContent = Math.max(0, score);
+}
+
+function renderCard(){
+  const card = document.getElementById('card');
+  if (i >= stages.length){
+    let rank, msg;
+    if (score >= 90){ rank = "Mestre das finanças"; msg = "Suas escolhas mostraram consistência: orçamento, reserva e uso consciente do crédito."; }
+    else if (score >= 50){ rank = "No caminho certo"; msg = "Bons hábitos já formados, com algumas escolhas que ainda pesam no bolso."; }
+    else { rank = "Ainda aprendendo"; msg = "Várias decisões custaram caro — um bom sinal de quais temas vale revisar."; }
+    card.innerHTML = `
+      <div class="end">
+        <h2>Fim da trilha</h2>
+        <div class="rank">${rank}</div>
+        <p>Saldo final: <strong>R$ ${saldo.toLocaleString('pt-BR')}</strong> · Índice financeiro: <strong>${Math.max(0,score)}</strong></p>
+        <p>${msg}</p>
+        <div class="discuss">
+          <p><strong>Para discutir com a turma:</strong></p>
+          <p>Qual escolha vocês fariam diferente? Alguém já viveu uma situação parecida?</p>
+        </div>
+        <button class="restart" onclick="restart()">Jogar novamente</button>
+      </div>`;
+    return;
+  }
+  const st = stages[i];
+  chosen = false;
+  card.innerHTML = `
+    <div class="stage-name">ETAPA ${i+1} DE ${stages.length} · ${st.name.toUpperCase()}</div>
+    <p class="event">${st.event}</p>
+    <div class="choices" id="choices">
+      ${st.choices.map((c,ci) => `<button class="choice" onclick="pick(${ci})">${c.label}</button>`).join('')}
+    </div>
+  `;
+}
+
+function pick(ci){
+  if (chosen) return;
+  chosen = true;
+  const st = stages[i];
+  const c = st.choices[ci];
+  saldo += c.saldo;
+  score += c.score;
+  renderStats();
+  document.querySelectorAll('#choices button').forEach(b => b.disabled = true);
+  const tagText = c.tag === 'pos' ? 'Boa escolha' : (c.score < 0 ? 'Custou caro' : 'Neutro');
+  const fbClass = c.tag === 'pos' ? 'pos' : (c.score < 0 ? 'neg' : '');
+  const deltaStr = (c.saldo>0?'+':'') + 'R$ ' + c.saldo.toLocaleString('pt-BR') + ' · ' + (c.score>0?'+':'') + c.score + ' pts';
+  document.getElementById('card').insertAdjacentHTML('beforeend', `
+    <div class="feedback ${fbClass}">
+      <span class="tag">${tagText} · ${deltaStr}</span>
+      <p>${c.fb}</p>
+      <button class="next" onclick="next()">${i+1 < stages.length ? 'Próxima etapa' : 'Ver resultado'}</button>
+    </div>
+  `);
+}
+
+function next(){ i++; renderTrack(); renderCard(); }
+function restart(){ i=0; saldo=0; score=0; renderTrack(); renderCard(); renderStats(); }
+
+renderTrack(); renderCard(); renderStats();
+</script>
+</body>
+</html>
