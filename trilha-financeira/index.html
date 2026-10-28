@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trilha do Dinheiro 💰 — Aprenda sobre Finanças!</title>
+  <meta name="description" content="Jogo educativo de trilha financeira para alunos aprenderem sobre dinheiro, economias e escolhas inteligentes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SKIP LINK para acessibilidade -->
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- TELA 1: BEM-VINDO -->
+  <div id="screen-welcome" class="screen active" role="main" aria-label="Tela de boas-vindas">
+    <div class="welcome-bg">
+      <div class="floating-coins" aria-hidden="true">
+        <span class="coin c1">💰</span>
+        <span class="coin c2">🪙</span>
+        <span class="coin c3">💵</span>
+        <span class="coin c4">🏦</span>
+        <span class="coin c5">💳</span>
+        <span class="coin c6">🛒</span>
+      </div>
+      <div class="welcome-card" id="main-content">
+        <div class="mascot-container" aria-hidden="true">
+          <img src="mascot.svg" alt="" class="mascot-img" id="mascot-welcome" />
+        </div>
+        <h1 class="welcome-title">
+          <span class="emoji-big" aria-hidden="true">💰</span><br />
+          Trilha do Dinheiro
+        </h1>
+        <p class="welcome-subtitle">
+          Aprenda sobre <strong>finanças</strong> tomando decisões inteligentes!<br />
+          <span class="tag-badge">✨ Para todas as idades</span>
+        </p>
+
+        <div class="name-section">
+          <label for="player-name" class="name-label">
+            <span aria-hidden="true">🧑‍🎓</span> Como você se chama?
+          </label>
+          <input
+            type="text"
+            id="player-name"
+            class="name-input"
+            placeholder="Digite seu nome aqui..."
+            maxlength="30"
+            aria-required="true"
+            autocomplete="given-name"
+          />
+        </div>
+
+        <div class="avatar-section" role="group" aria-label="Escolha seu avatar">
+          <p class="avatar-label"><span aria-hidden="true">🎭</span> Escolha seu personagem:</p>
+          <div class="avatar-grid">
+            <button class="avatar-btn active" data-avatar="🧒" aria-label="Criança" aria-pressed="true">🧒</button>
+            <button class="avatar-btn" data-avatar="👧" aria-label="Menina" aria-pressed="false">👧</button>
+            <button class="avatar-btn" data-avatar="👦" aria-label="Menino" aria-pressed="false">👦</button>
+            <button class="avatar-btn" data-avatar="🧑" aria-label="Jovem" aria-pressed="false">🧑</button>
+            <button class="avatar-btn" data-avatar="👩" aria-label="Mulher jovem" aria-pressed="false">👩</button>
+            <button class="avatar-btn" data-avatar="👨" aria-label="Homem jovem" aria-pressed="false">👨</button>
+            <button class="avatar-btn" data-avatar="🧓" aria-label="Pessoa mais velha" aria-pressed="false">🧓</button>
+            <button class="avatar-btn" data-avatar="🦸" aria-label="Super-herói" aria-pressed="false">🦸</button>
+          </div>
+        </div>
+
+        <button id="start-btn" class="btn-primary pulse-anim" aria-label="Iniciar o jogo">
+          <span aria-hidden="true">🚀</span> Vamos Começar!
+        </button>
+
+        <div class="accessibility-bar" role="group" aria-label="Opções de acessibilidade">
+          <button class="acc-btn" id="btn-fontup" title="Aumentar letra" aria-label="Aumentar tamanho da letra">
+            <span aria-hidden="true">🔠</span> A+
+          </button>
+          <button class="acc-btn" id="btn-fontdown" title="Diminuir letra" aria-label="Diminuir tamanho da letra">
+            A-
+          </button>
+          <button class="acc-btn" id="btn-contrast" title="Alto contraste" aria-label="Alternar alto contraste">
+            <span aria-hidden="true">🌗</span>
+          </button>
+          <button class="acc-btn" id="btn-audio" title="Leitura em voz alta" aria-label="Ativar ou desativar leitura em voz alta">
+            <span aria-hidden="true">🔊</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 2: JOGO -->
+  <div id="screen-game" class="screen" role="main" aria-label="Tela do jogo" aria-live="polite">
+    <!-- HUD -->
+    <header class="hud" role="banner">
+      <div class="hud-player">
+        <span id="hud-avatar" class="hud-avatar" aria-hidden="true">🧒</span>
+        <span id="hud-name" class="hud-name">Jogador</span>
+      </div>
+      <div class="hud-center">
+        <div class="hud-stat" role="status" aria-label="Dinheiro atual">
+          <span aria-hidden="true">💵</span>
+          <span id="hud-money">R$ 100,00</span>
+        </div>
+        <div class="hud-stat" role="status" aria-label="Poupança atual">
+          <span aria-hidden="true">🏦</span>
+          <span id="hud-savings">R$ 0,00</span>
+        </div>
+        <div class="hud-stat" role="status" aria-label="Felicidade">
+          <span aria-hidden="true">😊</span>
+          <span id="hud-happiness">5/10</span>
+        </div>
+      </div>
+      <div class="hud-progress">
+        <span class="progress-label" aria-label="Progresso do jogo">Fase <span id="hud-phase">1</span>/10</span>
+        <div class="progress-bar-wrap" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="10">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRILHA VISUAL -->
+    <div class="trail-container" aria-hidden="true">
+      <div class="trail-track" id="trail-track"></div>
+    </div>
+
+    <!-- CARD DO CENÁRIO -->
+    <main class="scenario-area">
+      <div class="scenario-card" id="scenario-card">
+        <div class="scenario-header">
+          <span class="scenario-icon" id="scenario-icon" aria-hidden="true">🏠</span>
+          <div>
+            <h2 class="scenario-phase" id="scenario-phase-label">Fase 1 de 10</h2>
+            <h3 class="scenario-title" id="scenario-title">Título do cenário</h3>
+          </div>
+        </div>
+        <div class="scenario-tip-banner" id="tip-banner" role="note" aria-label="Dica educacional">
+          <span aria-hidden="true">💡</span> <span id="tip-text"></span>
+        </div>
+        <p class="scenario-desc" id="scenario-desc">Descrição do cenário</p>
+
+        <div class="choices-grid" id="choices-grid" role="group" aria-label="Suas escolhas"></div>
+
+        <button class="btn-audio-scenario" id="btn-read-aloud" aria-label="Ler cenário em voz alta">
+          <span aria-hidden="true">🔊</span> Ouvir
+        </button>
+      </div>
+    </main>
+  </div>
+
+  <!-- TELA 3: FEEDBACK DA ESCOLHA -->
+  <div id="screen-feedback" class="screen" role="dialog" aria-modal="true" aria-label="Resultado da sua escolha">
+    <div class="feedback-card" id="feedback-card">
+      <div class="feedback-emoji" id="feedback-emoji" aria-hidden="true">🎉</div>
+      <h2 class="feedback-title" id="feedback-title">Boa escolha!</h2>
+      <p class="feedback-msg" id="feedback-msg">Mensagem de feedback</p>
+      <div class="feedback-changes" id="feedback-changes" aria-live="polite"></div>
+      <div class="feedback-lesson" id="feedback-lesson" role="note">
+        <span aria-hidden="true">📚</span> <span id="lesson-text"></span>
+      </div>
+      <button class="btn-primary" id="btn-next" aria-label="Continuar para a próxima fase">
+        <span aria-hidden="true">➡️</span> Continuar
+      </button>
+    </div>
+  </div>
+
+  <!-- TELA 4: FIM DO JOGO -->
+  <div id="screen-end" class="screen" role="main" aria-label="Tela de resultado final">
+    <div class="end-card">
+      <div class="end-confetti" aria-hidden="true" id="confetti-area"></div>
+      <div class="end-avatar" id="end-avatar" aria-hidden="true">🧒</div>
+      <h1 class="end-title">Parabéns, <span id="end-name">Jogador</span>!</h1>
+      <p class="end-subtitle" id="end-subtitle">Você completou a Trilha do Dinheiro!</p>
+
+      <div class="end-stats">
+        <div class="end-stat-card">
+          <span aria-hidden="true">💵</span>
+          <strong>Dinheiro Final</strong>
+          <span id="end-money">R$ 0,00</span>
+        </div>
+        <div class="end-stat-card">
+          <span aria-hidden="true">🏦</span>
+          <strong>Poupança</strong>
+          <span id="end-savings">R$ 0,00</span>
+        </div>
+        <div class="end-stat-card">
+          <span aria-hidden="true">😊</span>
+          <strong>Felicidade</strong>
+          <span id="end-happiness">0/10</span>
+        </div>
+      </div>
+
+      <div class="medal-area" id="medal-area" aria-label="Sua medalha" role="img"></div>
+
+      <div class="lessons-recap" id="lessons-recap" aria-label="Lições aprendidas">
+        <h2><span aria-hidden="true">📚</span> O que você aprendeu:</h2>
+        <ul id="lessons-list"></ul>
+      </div>
+
+      <div class="end-actions">
+        <button class="btn-primary" id="btn-restart" aria-label="Jogar novamente">
+          <span aria-hidden="true">🔄</span> Jogar Novamente
+        </button>
+        <button class="btn-secondary" id="btn-share" aria-label="Compartilhar resultado">
+          <span aria-hidden="true">🌟</span> Compartilhar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mascot SVG inline embutido como fallback -->
+  <script src="game.js"></script>
+</body>
+</html>
