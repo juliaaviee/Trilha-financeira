@@ -46,8 +46,8 @@ const SCENARIOS = [
         lesson: 'Dividir o dinheiro entre poupança e lazer (como na regra 50/50) permite curtir sem descuidar do futuro.'
       },
       {
-        text: 'Guardar R$ 25,00 na poupança e deixar R$ 25,00 na carteira',
-        money: 25, savings: 25, happiness: +1,
+        text: 'Guardar R$ 25,00 na poupança e colocar R$ 25,00 na carteira',
+        money: +25, savings: 25, happiness: +1,
         quality: 'good',
         msg: 'Muito organizado! Metade foi para a poupança e a outra metade ficou na carteira para despesas úteis.',
         lesson: 'Manter dinheiro reservado na carteira evita que você precise mexer na poupança a qualquer momento.'
@@ -57,34 +57,34 @@ const SCENARIOS = [
   {
     title: 'Feira do bairro',
     tip: 'Fazer uma lista antes de sair de casa evita compras por impulso e desperdício.',
-    desc: 'Você foi à feira comprar frutas e legumes para a semana com R$ 30,00 na carteira. Como você faz suas compras?',
+    desc: 'Você foi à feira comprar frutas e legumes para a semana com R$ 20,00 na carteira. Como você faz suas compras?',
     choices: [
       {
-        text: 'Faço uma lista e compro apenas o necessário (gasto R$ 15,00)',
-        money: -15, savings: 0, happiness: +1,
+        text: 'Faço uma lista e compro apenas o necessário (gasto R$ 10,00)',
+        money: -10, savings: 0, happiness: +1,
         quality: 'good',
-        msg: 'Parabéns! Com a lista, você comprou exatamente o planejado por R$ 15,00 e preservou o restante.',
+        msg: 'Parabéns! Com a lista, você comprou exatamente o planejado por R$ 10,00 e preservou o restante.',
         lesson: 'Uma lista de compras prévia é uma das formas mais eficientes de manter o orçamento sob controle.'
       },
       {
-        text: 'Compro tudo o que acho atraente nas bancas (gasto R$ 30,00)',
-        money: -30, savings: 0, happiness: +1,
+        text: 'Compro tudo o que acho atraente nas bancas (gasto R$ 20,00)',
+        money: -20, savings: 0, happiness: +1,
         quality: 'bad',
         msg: 'Você gastou todo o dinheiro disponível e corre o risco de deixar alimentos estragarem antes do consumo.',
         lesson: 'Comprar por impulso na feira ou mercado gera desperdício de alimentos e esvazia o bolso.'
       },
       {
-        text: 'Pesquiso as bancas e negocio desconto (gasto R$ 12,00)',
-        money: -12, savings: 0, happiness: +2,
+        text: 'Pesquiso as bancas e negocio desconto (gasto R$ 8,00)',
+        money: -8, savings: 0, happiness: +2,
         quality: 'good',
-        msg: 'Ótima pesquisa! Comparando preços e negociando com simpatia, você economizou R$ 3,00 a mais.',
+        msg: 'Ótima pesquisa! Comparando preços e negociando com simpatia, você comprou tudo por apenas R$ 8,00.',
         lesson: 'Pesquisar e pedir desconto respeitosamente é um hábito inteligente de quem valoriza o dinheiro.'
       },
       {
-        text: 'Desisto da feira e peço delivery caro em casa (gasto R$ 28,00)',
-        money: -28, savings: 0, happiness: 0,
+        text: 'Desisto da feira e peço delivery caro em casa (gasto R$ 22,00)',
+        money: -22, savings: 0, happiness: 0,
         quality: 'bad',
-        msg: 'A comida pronta foi prática, mas custou quase todo o dinheiro e rendeu muito menos para os próximos dias.',
+        msg: 'A comida pronta foi prática, mas custou mais caro e rendeu muito menos para os próximos dias.',
         lesson: 'A conveniência diária costuma ter um preço alto. Planejar refeições com alimentos frescos é mais econômico.'
       },
     ]
@@ -95,29 +95,29 @@ const SCENARIOS = [
     desc: 'Seus amigos compraram celulares novos. O seu ainda funciona muito bem, mas você sente vontade de trocar. O que fazer?',
     choices: [
       {
-        text: 'Continuo com o meu e guardo R$ 15,00 da carteira na poupança',
-        money: -15, savings: +15, happiness: +1,
+        text: 'Continuo com o meu e guardo R$ 10,00 da carteira na poupança',
+        money: -10, savings: +10, happiness: +1,
         quality: 'good',
-        msg: 'Maturidade financeira admirável! Você transferiu R$ 15,00 para a poupança para uma futura troca planejada.',
+        msg: 'Maturidade financeira admirável! Você transferiu R$ 10,00 para a poupança para uma futura troca planejada.',
         lesson: 'Resistir à pressão dos colegas protege suas economias. Seu valor pessoal não depende de ter o celular do ano.'
       },
       {
-        text: 'Levo a uma assistência para limpeza e revisão por R$ 10,00',
-        money: -10, savings: 0, happiness: +2,
+        text: 'Levo a uma assistência para revisão simples por R$ 8,00',
+        money: -8, savings: 0, happiness: +2,
         quality: 'good',
-        msg: 'Excelente escolha! Com uma manutenção barata de R$ 10,00, o aparelho ficou ágil e vai durar muito mais.',
+        msg: 'Excelente escolha! Com uma manutenção barata de R$ 8,00, o aparelho ficou ágil e vai durar muito mais.',
         lesson: 'Consertar e manter seus pertences em bom estado é muito mais sustentável e econômico do que comprar novo.'
       },
       {
-        text: 'Compro um modelo novo parcelado e pago R$ 25,00 de entrada',
-        money: -25, savings: 0, happiness: +1,
+        text: 'Compro uma capinha nova estilosa por R$ 12,00 para renovar o visual',
+        money: -12, savings: 0, happiness: +2,
         quality: 'mid',
-        msg: 'Você conseguiu o aparelho, mas gastou R$ 25,00 e comprometeu parte da sua renda nos próximos meses.',
-        lesson: 'Compras parceladas criam compromissos futuros fixos. Sempre calcule se as parcelas cabem com folga no orçamento.'
+        msg: 'Boa ideia! Por um valor pequeno você renovou o celular sem precisar gastar centenas de reais em um aparelho novo.',
+        lesson: 'Pequenos cuidados e renovações dão vida nova aos nossos pertences gastando quase nada.'
       },
       {
-        text: 'Compro o modelo mais caro à vista por R$ 50,00 para impressionar',
-        money: -50, savings: 0, happiness: -1,
+        text: 'Compro um modelo novo caro por impulso e pago R$ 30,00 de entrada',
+        money: -30, savings: 0, happiness: -1,
         quality: 'bad',
         msg: 'O impacto no saldo foi pesado. Passada a euforia dos primeiros dias, você percebeu que o dinheiro fará falta.',
         lesson: 'Gastar valores altos apenas para impressionar outras pessoas prejudica diretamente a sua tranquilidade.'
@@ -127,104 +127,104 @@ const SCENARIOS = [
   {
     title: 'Cantina da escola',
     tip: 'Pequenos gastos diários repetidos todos os meses somam valores surpreendentes.',
-    desc: 'Chegou a hora de definir como serão seus lanches na escola neste mês. Lanchar na cantina todos os dias custaria R$ 40,00. Como você se organiza?',
+    desc: 'Você recebeu sua mesada de R$ 30,00 para organizar seus lanches deste mês na escola. Como você vai administrar esse valor?',
     choices: [
       {
-        text: 'Preparo lanches em casa (gasto R$ 10,00 em ingredientes)',
-        money: -10, savings: 0, happiness: +1,
+        text: 'Preparo lanches em casa (gasto R$ 8,00 e sobram R$ 22,00 na carteira)',
+        money: +22, savings: 0, happiness: +1,
         quality: 'good',
-        msg: 'Economia exemplar! Preparar em casa custou apenas R$ 10,00 no mês, economizando R$ 30,00 em relação à cantina.',
+        msg: 'Economia exemplar! Preparar em casa custou apenas R$ 8,00 no mês, deixando R$ 22,00 livres na sua carteira.',
         lesson: 'Levar refeições ou lanches preparados em casa é um dos hábitos mais simples e eficazes para poupar.'
       },
       {
-        text: 'Preparo em casa e transfiro a economia de R$ 20,00 para a poupança',
-        money: -30, savings: +20, happiness: +2,
+        text: 'Preparo em casa e transfiro R$ 15,00 para a poupança (sobram R$ 7,00)',
+        money: +7, savings: +15, happiness: +2,
         quality: 'good',
-        msg: 'Planejamento impecável! R$ 10,00 foram para a comida e R$ 20,00 foram transferidos direto para a poupança.',
+        msg: 'Planejamento impecável! R$ 8,00 foram para a comida, R$ 15,00 para a poupança e ainda sobraram R$ 7,00 na carteira.',
         lesson: 'Destinar a economia de um hábito diário para a poupança transforma pequenas renúncias em patrimônio real.'
       },
       {
-        text: 'Compro na cantina apenas 1 ou 2 vezes na semana (gasto R$ 18,00)',
-        money: -18, savings: 0, happiness: +2,
+        text: 'Compro na cantina apenas 2 vezes na semana (gasto R$ 16,00 e sobram R$ 14,00)',
+        money: +14, savings: 0, happiness: +2,
         quality: 'mid',
-        msg: 'Belo equilíbrio! Você aproveitou a cantina com moderação e gastou menos da metade do valor total.',
+        msg: 'Belo equilíbrio! Você aproveitou a cantina com moderação e ainda guardou quase metade da mesada.',
         lesson: 'Estabelecer limites claros para compras de conveniência permite desfrutar do momento sem comprometer as finanças.'
       },
       {
-        text: 'Compro salgado e refrigerante na cantina todo dia (gasto R$ 40,00)',
-        money: -40, savings: 0, happiness: +1,
+        text: 'Consumo salgados e refrigerantes na cantina todo dia (gasto os R$ 30,00 inteiros)',
+        money: 0, savings: 0, happiness: +1,
         quality: 'bad',
-        msg: 'Foi gostoso, mas consumir na cantina todos os dias levou embora R$ 40,00 que poderiam ter outros destinos.',
-        lesson: 'Gastos de rotina diária são silenciosos. Somados ao final do mês, podem consumir uma parcela relevante do dinheiro.'
+        msg: 'Foi gostoso, mas gastar a mesada inteira na cantina não deixou nenhuma sobra para imprevistos.',
+        lesson: 'Gastos de rotina diária são silenciosos. Consumir tudo no dia a dia impede a formação de reservas.'
       },
     ]
   },
   {
     title: 'O torneio dos sonhos',
     tip: 'Ter uma meta definida torna o ato de economizar muito mais estimulante.',
-    desc: 'Sua turma quer participar do campeonato de esportes da cidade. A taxa de inscrição e a camisa custam R$ 25,00. Como você vai conseguir?',
+    desc: 'Sua turma quer participar do campeonato de esportes da cidade. A taxa de inscrição e a camisa custam R$ 15,00. Como você vai conseguir?',
     choices: [
       {
-        text: 'Faço pequenos bicos para vizinhos, ganho R$ 30,00 e pago a taxa (sobram R$ 5,00)',
-        money: +5, savings: 0, happiness: +3,
+        text: 'Faço pequenos bicos para vizinhos, ganho R$ 25,00 e pago a taxa (sobram R$ 10,00)',
+        money: +10, savings: 0, happiness: +3,
         quality: 'good',
-        msg: 'Espírito empreendedor notável! Você trabalhou, arrecadou R$ 30,00, pagou os R$ 25,00 da inscrição e ainda guardou R$ 5,00 na carteira.',
+        msg: 'Espírito empreendedor notável! Você arrecadou R$ 25,00, pagou a inscrição e ainda guardou R$ 10,00 de lucro.',
         lesson: 'Buscar formas criativas e honestas de obter renda ativa é a base do empreendedorismo e da autonomia.'
       },
       {
-        text: 'Uso R$ 25,00 da minha poupança guardada para objetivos',
-        money: 0, savings: -25, happiness: +2,
+        text: 'Uso R$ 15,00 da minha poupança guardada para objetivos',
+        money: 0, savings: -15, happiness: +2,
         quality: 'good',
         msg: 'Para isso serve a poupança com propósito! Você realizou uma meta pessoal sem recorrer a empréstimos.',
         lesson: 'Guardar dinheiro com uma meta pré-estabelecida dá clareza e sentido ao ato de poupar.'
       },
       {
-        text: 'Tomo empréstimo com juros (pagarei R$ 35,00 ao todo para quitar a taxa de R$ 25,00)',
-        money: -35, savings: 0, happiness: -2,
-        quality: 'bad',
-        msg: 'Você participou do torneio, mas o empréstimo gerou R$ 10,00 a mais em juros (R$ 35,00 pagos ao todo). Tomar empréstimo encarece muito qualquer objetivo.',
-        lesson: 'Tomar dinheiro emprestado sempre encarece a compra. Planejar antes de consumir evita juros.'
+        text: 'Economizo da mesada e pago os R$ 15,00 à vista com a carteira',
+        money: -15, savings: 0, happiness: +1,
+        quality: 'good',
+        msg: 'Decisão consciente! Você planejou seus gastos da carteira e pagou a taxa à vista sem dívidas.',
+        lesson: 'Pagar despesas pontuais com dinheiro disponível evita contrair empréstimos com juros.'
       },
       {
-        text: 'Desisto de participar por falta de planejamento financeiro',
-        money: 0, savings: 0, happiness: -2,
+        text: 'Tomo empréstimo com juros (pagarei R$ 22,00 ao todo com a carteira)',
+        money: -22, savings: 0, happiness: -2,
         quality: 'bad',
-        msg: 'Que pena! O torneio era especial para você. Poupar com antecedência teria garantido sua participação.',
-        lesson: 'Oportunidades têm data certa. Quem cria o hábito de se planejar não perde momentos importantes.'
+        msg: 'Você jogou o campeonato, mas o empréstimo gerou R$ 7,00 a mais em juros que pesará no bolso.',
+        lesson: 'Tomar dinheiro emprestado sempre encarece a compra. Planejar antes de consumir evita juros.'
       },
     ]
   },
   {
     title: 'A tentação do jogo',
     tip: 'Necessidades essenciais devem ser priorizadas sempre antes dos desejos.',
-    desc: 'Um jogo digital entrou em oferta relâmpago por R$ 30,00. No entanto, você já tinha se comprometido a pagar uma apostila escolar de R$ 20,00. O que fazer?',
+    desc: 'Você precisa comprar uma apostila escolar por R$ 12,00. No entanto, viu um jogo digital em oferta por R$ 18,00. O que fazer?',
     choices: [
       {
-        text: 'Pago a apostila de R$ 20,00 e guardo R$ 10,00 na poupança',
-        money: -30, savings: +10, happiness: +1,
+        text: 'Pago a apostila de R$ 12,00 e guardo R$ 10,00 na poupança',
+        money: -22, savings: +10, happiness: +1,
         quality: 'good',
         msg: 'Responsabilidade admirável! Compromissos de estudo em primeiro lugar e ainda reforçou a poupança.',
         lesson: 'Priorizar compromissos obrigatórios antes do entretenimento constrói uma vida financeira tranquila.'
       },
       {
-        text: 'Pago apenas a apostila (R$ 20,00) e espero outra promoção do jogo',
-        money: -20, savings: 0, happiness: +1,
+        text: 'Pago apenas a apostila de R$ 12,00 e espero outra promoção do jogo',
+        money: -12, savings: 0, happiness: +1,
         quality: 'good',
         msg: 'Muita paciência e bom senso! Apostila garantida e nada de compras impulsivas.',
         lesson: 'Aguardar promoções futuras com o dinheiro preservado é uma estratégia clássica de compra inteligente.'
       },
       {
-        text: 'Compro o jogo por R$ 30,00 e deixo a apostila para depois',
-        money: -30, savings: 0, happiness: 0,
+        text: 'Compro o jogo por R$ 18,00 e deixo a apostila para depois',
+        money: -18, savings: 0, happiness: 0,
         quality: 'bad',
         msg: 'A empolgação com o jogo logo passou, e a pendência da apostila escolar continuou sem solução.',
         lesson: 'Deixar de pagar materiais essenciais para consumir entretenimento traz prejuízos na formação.'
       },
       {
-        text: 'Divido a compra da apostila e o acesso ao jogo com um amigo (gasto R$ 25,00)',
-        money: -25, savings: 0, happiness: +2,
+        text: 'Divido a compra da apostila com um colega de turma (pago R$ 6,00)',
+        money: -6, savings: 0, happiness: +2,
         quality: 'mid',
-        msg: 'Solução cooperativa! Compartilhar despesas reduziu o peso individual de ambas as tarefas.',
+        msg: 'Solução cooperativa! Compartilhar o material reduziu pela metade o custo da apostila.',
         lesson: 'O consumo compartilhado e a cooperação entre amigos ajudam a viabilizar objetivos com menor custo.'
       },
     ]
@@ -232,27 +232,27 @@ const SCENARIOS = [
   {
     title: 'Emergência inesperada',
     tip: 'Uma reserva de emergência serve justamente para imprevistos não virarem dívidas.',
-    desc: 'Seu material escolar estragou acidentalmente e você precisa repor caderno e estojo com urgência por R$ 25,00. O que você faz?',
+    desc: 'Seu material escolar estragou acidentalmente e você precisa repor caderno e estojo com urgência por R$ 15,00. O que você faz?',
     choices: [
       {
         text: 'Uso minha reserva de emergência guardada na poupança',
-        money: 0, savings: -25, happiness: 0,
+        money: 0, savings: -15, happiness: 0,
         quality: 'good',
         msg: 'Perfeito! É exatamente para momentos como esse que a reserva de emergência existe — tranquilidade total.',
         lesson: 'Manter uma reserva financeira evita o desespero e impede o endividamento diante de imprevistos da vida.'
       },
       {
-        text: 'Ajusto o orçamento deste mês e cubro os R$ 25,00 com a carteira',
-        money: -25, savings: 0, happiness: -1,
+        text: 'Ajusto o orçamento deste mês e cubro os R$ 15,00 com a carteira',
+        money: -15, savings: 0, happiness: -1,
         quality: 'good',
         msg: 'Ótima flexibilidade! Você cortou gastos não urgentes da carteira e resolveu a emergência sem dívidas.',
         lesson: 'Ter flexibilidade para reajustar gastos diante de uma surpresa é um sinal evidente de maturidade financeira.'
       },
       {
-        text: 'Pego empréstimo com juros altos (pagarei R$ 35,00 ao todo)',
-        money: -35, savings: 0, happiness: -2,
+        text: 'Pego empréstimo com juros (pagarei R$ 22,00 ao todo com a carteira)',
+        money: -22, savings: 0, happiness: -2,
         quality: 'bad',
-        msg: 'O material foi comprado, mas o empréstimo custou R$ 10,00 a mais por falta de reserva própria.',
+        msg: 'O material foi comprado, mas o empréstimo custou R$ 7,00 a mais por falta de reserva própria.',
         lesson: 'Sem uma reserva de emergência, qualquer gasto inesperado se transforma em uma dívida custosa com juros.'
       },
       {
@@ -267,34 +267,34 @@ const SCENARIOS = [
   {
     title: 'Renda extra especial',
     tip: 'Ao receber renda extraordinária, a melhor prática é poupar antes de pensar em gastar.',
-    desc: 'Você colaborou na organização da feira de ciências da escola e recebeu R$ 60,00 de comissão! O que você faz com esse ganho?',
+    desc: 'Você colaborou na organização da feira de ciências da escola e recebeu R$ 50,00 de comissão! O que você faz com esse ganho?',
     choices: [
       {
-        text: 'Transfiro os R$ 60,00 diretamente para a poupança',
-        money: 0, savings: +60, happiness: +1,
+        text: 'Transfiro os R$ 50,00 diretamente para a poupança',
+        money: 0, savings: +50, happiness: +1,
         quality: 'good',
         msg: 'Disciplina formidável! Guardar receitas extras integralmente é o caminho mais rápido para ver a poupança crescer.',
         lesson: 'Poupar 100% da renda inesperada acelera seus objetivos e não compromete seu orçamento rotineiro.'
       },
       {
-        text: 'Guardo R$ 30,00 na poupança e deixo R$ 30,00 na carteira',
-        money: +30, savings: +30, happiness: +2,
+        text: 'Guardo R$ 25,00 na poupança e deixo R$ 25,00 na carteira',
+        money: +25, savings: +25, happiness: +2,
         quality: 'mid',
         msg: 'Equilíbrio saudável! Você fortaleceu sua segurança financeira e ficou com dinheiro disponível na carteira.',
         lesson: 'A regra de repartir a renda extra equilibra a sensação de merecimento com o cuidado pelo futuro.'
       },
       {
-        text: 'Gasto todos os R$ 60,00 em compras aleatórias no mesmo dia',
+        text: 'Gasto todos os R$ 50,00 em compras aleatórias no mesmo dia',
         money: 0, savings: 0, happiness: +1,
         quality: 'bad',
         msg: 'O dinheiro entrou e evaporou no mesmo dia sem deixar qualquer reserva para o futuro.',
         lesson: 'Tratar renda extra como dinheiro sem valor impede a construção de um patrimônio duradouro.'
       },
       {
-        text: 'Uso R$ 20,00 para quitar uma pendência e guardo R$ 40,00 na poupança',
-        money: 0, savings: +40, happiness: +3,
+        text: 'Uso R$ 15,00 para quitar uma pendência e guardo R$ 35,00 na poupança',
+        money: 0, savings: +35, happiness: +3,
         quality: 'good',
-        msg: 'Decisão impecável! Você eliminou compromissos passados e ainda direcionou R$ 40,00 para o seu futuro.',
+        msg: 'Decisão impecável! Você eliminou compromissos passados e ainda direcionou R$ 35,00 para o seu futuro.',
         lesson: 'Quitar pendências e dívidas é sempre um dos melhores investimentos, pois livra você de cobranças futuras.'
       },
     ]
@@ -312,21 +312,21 @@ const SCENARIOS = [
         lesson: 'Quando a família se une e planeja os gastos em conjunto, as metas são alcançadas com muito mais facilidade.'
       },
       {
-        text: 'Pesquiso cupons online, acho oferta por R$ 100,00 e contribuo com R$ 10,00',
+        text: 'Pesquiso cupons online, acho oferta com desconto e contribuo com R$ 10,00',
         money: -10, savings: 0, happiness: +3,
         quality: 'good',
-        msg: 'Excelente iniciativa! Sua pesquisa gerou R$ 20,00 de economia para a família inteira.',
+        msg: 'Excelente iniciativa! Sua pesquisa gerou economia para a família inteira.',
         lesson: 'Dedicar tempo à comparação de preços e busca por promoções resulta em economia expressiva em bens duráveis.'
       },
       {
-        text: 'Sugiro parcelar em 12 vezes com juros altos (o produto sairá por R$ 180,00)',
-        money: -25, savings: 0, happiness: 0,
+        text: 'Sugiro parcelar em 12 vezes com juros altos (contribuo com R$ 20,00)',
+        money: -20, savings: 0, happiness: 0,
         quality: 'bad',
-        msg: 'O produto chegou, mas pagar 50% a mais apenas em juros comprometerá o orçamento familiar por um ano inteiro.',
+        msg: 'O produto chegou, mas pagar juros altos comprometerá o orçamento familiar por um ano inteiro.',
         lesson: 'Financiamentos longos encarecem consideravelmente o preço final. Vale muito a pena poupar para pagar à vista.'
       },
       {
-        text: 'Sugiro adquirir um modelo seminovo revisado por R$ 60,00 (contribuo com R$ 10,00)',
+        text: 'Sugiro adquirir um modelo seminovo revisado (contribuo com R$ 10,00)',
         money: -10, savings: 0, happiness: +2,
         quality: 'good',
         msg: 'Ideia prática e sustentável! O produto funciona perfeitamente e custou a metade do valor da loja.',
@@ -492,11 +492,11 @@ function handleChoice(idx) {
   const actualMoneyDelta = state.money - prevMoney;
   const actualSavingsDelta = state.savings - prevSavings;
 
-  setTimeout(() => showFeedback(choice, scenario, actualMoneyDelta, actualSavingsDelta), 400);
+  setTimeout(() => showFeedback(choice, scenario, actualMoneyDelta, actualSavingsDelta, prevSavings), 400);
 }
 
 // ── Mostrar feedback ─────────────────────────────────────────
-function showFeedback(choice, scenario, moneyDelta, savingsDelta) {
+function showFeedback(choice, scenario, moneyDelta, savingsDelta, prevSavings = 0) {
   const screen = document.getElementById('screen-feedback');
   const titleEl = document.getElementById('feedback-title');
   const msgEl = document.getElementById('feedback-msg');
@@ -512,7 +512,18 @@ function showFeedback(choice, scenario, moneyDelta, savingsDelta) {
 
   titleEl.textContent = q.title;
   titleEl.className = `feedback-title ${q.cls}`;
-  msgEl.textContent = choice.msg;
+
+  // Se tentou resgatar da poupança mas não tinha saldo suficiente, dá o aviso pedagógico:
+  let feedbackMessage = choice.msg;
+  if (choice.savings < 0 && prevSavings < Math.abs(choice.savings)) {
+    if (prevSavings === 0) {
+      feedbackMessage = 'Atenção: como você não tinha reserva guardada na poupança, o valor teve de sair da sua carteira. É por isso que construir uma reserva com antecedência é essencial!';
+    } else {
+      feedbackMessage = `Você utilizou os R$ ${prevSavings.toFixed(2).replace('.', ',')} guardados na poupança e o restante precisou sair da sua carteira. Manter uma reserva completa protege seu orçamento!`;
+    }
+  }
+
+  msgEl.textContent = feedbackMessage;
   lessonEl.textContent = choice.lesson;
 
   // Chips de mudança sem emojis antes das palavras
@@ -579,15 +590,15 @@ function showEndScreen() {
   const medalArea = document.getElementById('medal-area');
   const subtitleEl = document.getElementById('end-subtitle');
 
-  if (score >= 260) {
+  if (score >= 250) {
     medalArea.textContent = '🥇';
     medalArea.setAttribute('aria-label', 'Medalha de ouro — Mestre das Finanças');
     subtitleEl.textContent = 'Você é um(a) Mestre das Finanças! Parabéns pelo resultado excepcional!';
-  } else if (score >= 180) {
+  } else if (score >= 170) {
     medalArea.textContent = '🥈';
     medalArea.setAttribute('aria-label', 'Medalha de prata — Especialista Financeiro');
     subtitleEl.textContent = 'Você é um(a) Especialista Financeiro(a)! Suas escolhas foram muito conscientes.';
-  } else if (score >= 120) {
+  } else if (score >= 110) {
     medalArea.textContent = '🥉';
     medalArea.setAttribute('aria-label', 'Medalha de bronze — Estudante de Finanças');
     subtitleEl.textContent = 'Você é um(a) Estudante de Finanças em crescimento! Bom caminho trilhado.';
@@ -764,29 +775,3 @@ document.getElementById('btn-share').addEventListener('click', shareResult);
 if ('speechSynthesis' in window) {
   window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
-
-// ── Mascote SVG embutido (fallback caso imagem não carregue) ──
-(function injectMascot() {
-  const img = document.getElementById('mascot-welcome');
-  if (!img) return;
-  const svg = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="100" cy="115" r="70" fill="#C084FC"/>
-    <circle cx="100" cy="115" r="58" fill="#E9D5FF"/>
-    <ellipse cx="80" cy="140" rx="18" ry="12" fill="#C084FC"/>
-    <ellipse cx="120" cy="140" rx="18" ry="12" fill="#C084FC"/>
-    <circle cx="100" cy="110" r="30" fill="#F5D0FF"/>
-    <ellipse cx="95" cy="118" rx="6" ry="5" fill="#C084FC"/>
-    <ellipse cx="105" cy="118" rx="6" ry="5" fill="#C084FC"/>
-    <circle cx="93" cy="100" r="5" fill="#7C3AED"/>
-    <circle cx="107" cy="100" r="5" fill="#7C3AED"/>
-    <circle cx="94" cy="99" r="2" fill="#fff"/>
-    <circle cx="108" cy="99" r="2" fill="#fff"/>
-    <path d="M92 110 Q100 118 108 110" stroke="#7C3AED" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <rect x="88" y="55" width="24" height="18" rx="4" fill="#FFB800"/>
-    <rect x="98" y="45" width="8" height="12" rx="2" fill="#FFB800"/>
-    <circle cx="100" cy="44" r="3" fill="#FFD700"/>
-    <circle cx="75" cy="90" r="14" fill="#E9D5FF" stroke="#C084FC" stroke-width="2"/>
-    <circle cx="125" cy="90" r="14" fill="#E9D5FF" stroke="#C084FC" stroke-width="2"/>
-  </svg>`;
-  img.outerHTML = svg;
-})();
