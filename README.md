@@ -1,4 +1,4 @@
-Trilha do Dinheiro
+# Trilha do Dinheiro
 
 Jogo educativo de trilha financeira para aprender sobre dinheiro, economia e escolhas inteligentes — de um jeito leve, interativo e para todas as idades.
 
@@ -6,13 +6,13 @@ Jogo educativo de trilha financeira para aprender sobre dinheiro, economia e esc
 
 ---
 
-##Sobre o projeto
+## Sobre o projeto
 
 A **Trilha do Dinheiro** é um jogo web em que a pessoa percorre **10 fases**, cada uma com um cenário do dia a dia (compras, imprevistos, poupança, desejos x necessidades...). A cada fase é preciso tomar uma decisão, e cada escolha afeta o dinheiro, a poupança e a felicidade do personagem.
 
 O objetivo é mostrar, na prática, que decisões financeiras têm consequências, e que equilibrar o presente e o futuro faz parte de usar o dinheiro com consciência.
 
-##Como jogar
+## Como jogar
 
 1. Digite o seu nome.
 2. Escolha um personagem (🧒 👧 👦 🧑 👩 👨 🧓 🦸).
@@ -21,7 +21,7 @@ O objetivo é mostrar, na prática, que decisões financeiras têm consequência
 5. Veja o feedback da sua escolha e o que ela ensina.
 6. Ao final das 10 fases, confira o resultado e tudo o que você aprendeu.
 
-###Indicadores do jogo
+### Indicadores do jogo
 
 | Indicador | Descrição |
 |---|---|
@@ -39,19 +39,19 @@ O objetivo é mostrar, na prática, que decisões financeiras têm consequência
 - Opção de jogar novamente
 - Botão de compartilhar o resultado
 
-###Acessibilidade
+### Acessibilidade
 
 - Ajuste do tamanho da fonte (A+ / A-)
 - Alternância de contraste/tema
 - Leitura em voz alta dos cenários ("Ouvir")
 - Link para pular direto ao conteúdo principal
 
-##Tecnologias
+## Tecnologias
 
 - HTML, CSS e JavaScript
 - Hospedagem no [Netlify](https://www.netlify.com/)
 
-##Estrutura do repositório
+## Estrutura do repositório
 
 ```
 Trilha-financeira/
@@ -60,7 +60,7 @@ Trilha-financeira/
 └── README.md
 ```
 
-##Como executar localmente
+## Como executar localmente
 
 1. Clone o repositório:
    ```bash
