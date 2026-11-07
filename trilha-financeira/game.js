@@ -165,10 +165,10 @@ const SCENARIOS = [
     desc: 'Sua turma quer participar do campeonato de esportes da cidade. A taxa de inscrição e a camisa custam R$ 25,00. Como você vai conseguir?',
     choices: [
       {
-        text: 'Faço pequenos bicos e serviços para vizinhos e arrecado R$ 30,00',
-        money: +30, savings: 0, happiness: +3,
+        text: 'Faço pequenos bicos para vizinhos, ganho R$ 30,00 e pago a taxa (sobram R$ 5,00)',
+        money: +5, savings: 0, happiness: +3,
         quality: 'good',
-        msg: 'Espírito empreendedor notável! Com esforço próprio, você ganhou R$ 30,00 e já pode custear sua vaga.',
+        msg: 'Espírito empreendedor notável! Você trabalhou, arrecadou R$ 30,00, pagou os R$ 25,00 da inscrição e ainda guardou R$ 5,00 na carteira.',
         lesson: 'Buscar formas criativas e honestas de obter renda ativa é a base do empreendedorismo e da autonomia.'
       },
       {
@@ -179,10 +179,10 @@ const SCENARIOS = [
         lesson: 'Guardar dinheiro com uma meta pré-estabelecida dá clareza e sentido ao ato de poupar.'
       },
       {
-        text: 'Tomo emprestado pagando juros (terei de devolver R$ 35,00)',
-        money: -10, savings: 0, happiness: -1,
+        text: 'Tomo empréstimo com juros (pagarei R$ 35,00 ao todo para quitar a taxa de R$ 25,00)',
+        money: -35, savings: 0, happiness: -2,
         quality: 'bad',
-        msg: 'Você jogou o campeonato, mas o empréstimo gerou um custo extra de R$ 10,00 em juros que pesará no bolso.',
+        msg: 'Você participou do torneio, mas o empréstimo gerou R$ 10,00 a mais em juros (R$ 35,00 pagos ao todo). Tomar empréstimo encarece muito qualquer objetivo.',
         lesson: 'Tomar dinheiro emprestado sempre encarece a compra. Planejar antes de consumir evita juros.'
       },
       {
@@ -387,7 +387,7 @@ function updateHUD() {
   document.getElementById('hud-happiness').textContent = `${Math.max(0, Math.min(10, state.happiness))}/10`;
   document.getElementById('hud-phase').textContent = state.currentPhase + 1;
 
-  const pct = ((state.currentPhase) / SCENARIOS.length) * 100;
+  const pct = ((state.currentPhase + 1) / SCENARIOS.length) * 100;
   document.getElementById('progress-fill').style.width = `${pct}%`;
   document.querySelector('.progress-bar-wrap').setAttribute('aria-valuenow', state.currentPhase + 1);
 }
@@ -467,6 +467,9 @@ function handleChoice(idx) {
     else b.style.opacity = '0.4';
   });
 
+  const prevMoney = state.money;
+  const prevSavings = state.savings;
+
   // Ajuste contábil inteligente
   let moneyDelta = choice.money;
   let savingsDelta = choice.savings;
@@ -485,7 +488,11 @@ function handleChoice(idx) {
   state.happiness = Math.max(0, Math.min(10, state.happiness + choice.happiness));
   state.lessons.push(choice.lesson);
 
-  setTimeout(() => showFeedback(choice, scenario, moneyDelta, savingsDelta), 400);
+  // Variação REAL que ocorreu nos saldos (evita mostrar dedução maior do que havia na carteira)
+  const actualMoneyDelta = state.money - prevMoney;
+  const actualSavingsDelta = state.savings - prevSavings;
+
+  setTimeout(() => showFeedback(choice, scenario, actualMoneyDelta, actualSavingsDelta), 400);
 }
 
 // ── Mostrar feedback ─────────────────────────────────────────
@@ -567,21 +574,20 @@ function showEndScreen() {
   document.getElementById('end-savings').textContent = formatMoney(state.savings);
   document.getElementById('end-happiness').textContent = `${Math.max(0, Math.min(10, state.happiness))}/10`;
 
-  // Pontuação considera patrimônio total (dinheiro + poupança) + felicidade
-  const totalAssets = state.money + state.savings;
-  const score = totalAssets + (state.happiness * 10);
+  // Poupança tem peso dobrado (2x) sobre a carteira para premiar quem poupou; felicidade soma até 50 pts
+  const score = Math.round((state.savings * 2) + state.money + (state.happiness * 5));
   const medalArea = document.getElementById('medal-area');
   const subtitleEl = document.getElementById('end-subtitle');
 
-  if (score >= 180) {
+  if (score >= 260) {
     medalArea.textContent = '🥇';
     medalArea.setAttribute('aria-label', 'Medalha de ouro — Mestre das Finanças');
     subtitleEl.textContent = 'Você é um(a) Mestre das Finanças! Parabéns pelo resultado excepcional!';
-  } else if (score >= 130) {
+  } else if (score >= 180) {
     medalArea.textContent = '🥈';
     medalArea.setAttribute('aria-label', 'Medalha de prata — Especialista Financeiro');
     subtitleEl.textContent = 'Você é um(a) Especialista Financeiro(a)! Suas escolhas foram muito conscientes.';
-  } else if (score >= 80) {
+  } else if (score >= 120) {
     medalArea.textContent = '🥉';
     medalArea.setAttribute('aria-label', 'Medalha de bronze — Estudante de Finanças');
     subtitleEl.textContent = 'Você é um(a) Estudante de Finanças em crescimento! Bom caminho trilhado.';
@@ -628,8 +634,8 @@ function launchConfetti() {
 }
 
 // ── Text-to-Speech ───────────────────────────────────────────
-function speakText(text) {
-  if (!state.audioEnabled || !('speechSynthesis' in window)) return;
+function speakText(text, force = false) {
+  if ((!state.audioEnabled && !force) || !('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = 'pt-BR';
@@ -656,8 +662,10 @@ function restartGame() {
   document.getElementById('screen-feedback').style.display = 'none';
   document.getElementById('screen-feedback').classList.remove('active');
 
-  document.getElementById('screen-welcome').style.display = 'flex';
-  document.getElementById('screen-welcome').classList.add('active');
+  const welcome = document.getElementById('screen-welcome');
+  welcome.style.opacity = '1';
+  welcome.style.display = 'flex';
+  welcome.classList.add('active');
 }
 
 // ── Compartilhar resultado ────────────────────────────────────
@@ -714,7 +722,7 @@ document.querySelectorAll('.avatar-btn').forEach(btn => {
 // ── Botão de leitura no cenário ───────────────────────────────
 document.getElementById('btn-read-aloud').addEventListener('click', () => {
   const scenario = SCENARIOS[state.currentPhase];
-  if (scenario) speakText(`${scenario.title}. ${scenario.desc}`);
+  if (scenario) speakText(`${scenario.title}. ${scenario.desc}`, true);
 });
 
 // ── Iniciar jogo ──────────────────────────────────────────────
