@@ -2,7 +2,7 @@
 
 Jogo educativo de trilha financeira para aprender sobre dinheiro, economia e escolhas inteligentes — de um jeito leve, interativo e para todas as idades.
 
-**Jogue agora:** [Trilha do Dinheiro — Aprenda sobre Finanças!](https://cheerful-cupcake-0cf9f4.netlify.app/)
+**Jogue agora:** [Trilha do Dinheiro — Aprenda sobre Finanças!](https://trilha-financeira.netlify.app/)
 
 ---
 
